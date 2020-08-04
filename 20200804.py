@@ -9,15 +9,14 @@ soup = BeautifulSoup(response.text, "html.parser")
 
 movie_data = []
 
-movie_section = soup.select('dt.tit a')
-for a_tag in movie_section: 
-    movie_title = a_tag.text
+movies = soup.select('dt.tit a')
+for a_tag in movies: 
+    title = a_tag.text
 
-    movie_link = a_tag['href']
-    code = movie_link[movie_link.find('code=')+5:]
-
+    link_split = a_tag['href'].split('=')
+    code = link_split[1]
     movie_tile_code = {
-        'title' : movie_title,
+        'title' : title,
         'code' : code
     } 
     movie_data.append(movie_tile_code)
